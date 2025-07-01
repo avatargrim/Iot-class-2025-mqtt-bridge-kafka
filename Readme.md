@@ -58,7 +58,7 @@ $ docker compose up --build
 $ cd ~/Iot-class-2025-mqtt-bridge-kafka
 
 # build and start container
-$ docker compose down --volumes --remove-orphans --rmi
+$ docker compose down --volumes --remove-orphans --rmi local
 
 ```
 
