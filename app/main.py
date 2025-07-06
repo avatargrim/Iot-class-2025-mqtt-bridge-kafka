@@ -28,7 +28,7 @@ MQTT_TOPIC = os.getenv("MQTT_TOPIC", "iot-frames-model")
 MQTT_BROKER = os.getenv("MQTT_BROKER", "localhost")
 MQTT_PORT = os.getenv("MQTT_PORT", "1883")
 MQTT_QOS = os.getenv("MQTT_QOS", "1")
-KAFKA_OUTPUT_MODEL_TOPIC = os.getenv("KAFKA_OUTPUT_MODEL_TOPIC", "event-frames-model")
+KAFKA_OUTPUT_TOPIC = os.getenv("KAFKA_OUTPUT_TOPIC", "event-frames-model")
 KAFKA_BROKER = os.getenv("KAFKA_BROKER", "192.168.1.104:9092")
 UID = os.getenv("UID", "123456789")
 
@@ -57,7 +57,7 @@ def configure_authentication(mqtt_client):
     logging.info("Using anonymous authentication")
 
 # Validate the config
-if KAFKA_OUTPUT_MODEL_TOPIC == "":
+if KAFKA_OUTPUT_TOPIC == "":
     raise ValueError("output (topic) environment variable is required")
 if MQTT_TOPIC == "":
     raise ValueError('mqtt_topic must be supplied')
@@ -81,7 +81,7 @@ app = Application(broker_address=KAFKA_BROKER,
 # Create the producer, this is used to write data to the output topic
 producer = app.get_producer()
 # create a topic object for use later on
-output_topic = app.topic(KAFKA_OUTPUT_MODEL_TOPIC, value_serializer="json")
+output_topic = app.topic(KAFKA_OUTPUT_TOPIC, value_serializer="json")
 
 logging.info(f"Connected: KAFKA={KAFKA_BROKER}")
 # setting callbacks for different events to see if it works, print the message etc.
@@ -124,7 +124,7 @@ def on_message_cb(client: paho.Client, userdata: any, msg: paho.MQTTMessage):
                     key=message_key,
                     value=new_payload,
                     timestamp=int(time.time() * 1000))
-    logging.info(f"KAFKA_BROKER={KAFKA_BROKER} TOPIC={KAFKA_OUTPUT_MODEL_TOPIC}")
+    logging.info(f"KAFKA_BROKER={KAFKA_BROKER} TOPIC={KAFKA_OUTPUT_TOPIC}")
     logging.info(f"\tKey={message_key} Payload={new_payload}\n")
 
 # print which topic was subscribed to
