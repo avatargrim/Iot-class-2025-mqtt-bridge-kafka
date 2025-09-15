@@ -28,7 +28,7 @@ MQTT_TOPIC = os.getenv("MQTT_TOPIC", "iot-frames-model")
 MQTT_BROKER = os.getenv("MQTT_BROKER", "localhost")
 MQTT_PORT = os.getenv("MQTT_PORT", "1883")
 MQTT_QOS = os.getenv("MQTT_QOS", "1")
-KAFKA_OUTPUT_TOPIC = os.getenv("KAFKA_OUTPUT_TOPIC", "event-frames-model")
+KAFKA_OUTPUT_TOPIC = os.getenv("KAFKA_OUTPUT_TOPIC", "6510301032_AQ")
 KAFKA_BROKER = os.getenv("KAFKA_BROKER", "192.168.1.104:9092")
 UID = os.getenv("UID", "123456789")
 
